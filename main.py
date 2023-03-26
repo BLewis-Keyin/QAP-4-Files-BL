@@ -1,4 +1,8 @@
-# Import
+# Program for creating insurance policies for customers
+# Completed 3/21/2023
+#
+
+# Import libraries for use in the program
 from datetime import date, timedelta
 import time
 
@@ -6,8 +10,8 @@ today = date.today()
 payment_day = today.replace(day=1) + timedelta(days=32)
 payment_day = payment_day.replace(day=1)
 
-print(today)
-print(payment_day)
+# print(today)
+# print(payment_day)
 
 
 # Define constants from OSICDef.dat
@@ -26,7 +30,7 @@ f.close()
 # Define province list
 provlist = ['AB', 'BC', 'MB', 'NB', 'NL', 'NS', 'NT', 'NU', 'ON', 'PE', 'QC', 'SK', 'YT']
 
-print(provlist)
+# print(provlist)
 
 # Start of the program loop
 while True:
@@ -176,20 +180,20 @@ while True:
         POLICY_NUM = POLICY_NUM + 1
         print("Saving policy information...")
         time.sleep(2)
-        print("Policy information successfully saved.")
-        time.sleep(2)
+        print("Policy information successfully saved.\n")
+        time.sleep(1)
 
     program_end = input("press any key to enter a new policy or type END to exit... :  ").upper()
     if program_end == "END":
         f = open('OSICDef.dat', 'w')
-        f.write(f'{POLICY_NUM}')
-        f.write(f'{BASE_PREMIUM}')
-        f.write(f'{RATE_DISCOUNT}')
-        f.write(f'{COST_LIB}')
-        f.write(f'{COST_GLASS}')
-        f.write(f'{COST_LOANER}')
-        f.write(f'{RATE_HST}')
-        f.write(f'{PROCESS_FEE}')
+        f.write(f'{POLICY_NUM}\n')
+        f.write(f'{BASE_PREMIUM}\n')
+        f.write(f'{RATE_DISCOUNT}\n')
+        f.write(f'{COST_LIB}\n')
+        f.write(f'{COST_GLASS}\n')
+        f.write(f'{COST_LOANER}\n')
+        f.write(f'{RATE_HST}\n')
+        f.write(f'{PROCESS_FEE}\n')
         f.close()
 
         exit()
