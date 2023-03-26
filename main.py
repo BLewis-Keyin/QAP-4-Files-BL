@@ -1,8 +1,8 @@
 # Program for creating insurance policies for customers
 # Completed 3/21/2023
-#
+# Made by Brandon Lewis
 
-# Import libraries for use in the program
+# import libraries for use in the program
 from datetime import date, timedelta
 import time
 
@@ -10,11 +10,8 @@ today = date.today()
 payment_day = today.replace(day=1) + timedelta(days=32)
 payment_day = payment_day.replace(day=1)
 
-# print(today)
-# print(payment_day)
 
-
-# Define constants from OSICDef.dat
+# define constants from OSICDef.dat
 f = open('OSICDef.dat', 'r')
 POLICY_NUM = int(f.readline().strip())
 BASE_PREMIUM = float(f.readline().strip())
@@ -27,16 +24,17 @@ PROCESS_FEE = float(f.readline().strip())
 f.close()
 
 
-# Define province list
+# define province list
 provlist = ['AB', 'BC', 'MB', 'NB', 'NL', 'NS', 'NT', 'NU', 'ON', 'PE', 'QC', 'SK', 'YT']
 
-# print(provlist)
-
-# Start of the program loop
+# start of the program loop
 while True:
+    # user inputs for policy information
+    print("Please input customer policy information below\n")
 
+    # prompt the user for customer first name
     while True:
-        c_first_name = input("Customer First Name:                                 ").title()
+        c_first_name = input("Customer First Name:                        ").title()
         if len(c_first_name) == 0:
             print("ERROR: Nothing was entered, please try again.")
         elif c_first_name.replace("-", "").replace("'", "").isalpha() is False:
@@ -44,8 +42,9 @@ while True:
         else:
             break
 
+    # prompt the user for customer last name
     while True:
-        c_last_name = input("Customer Last Name:                                 ").title()
+        c_last_name = input("Customer Last Name:                         ").title()
         if len(c_last_name) == 0:
             print("ERROR: Nothing was entered, please try again.")
         elif c_last_name.replace("-", "").replace("'", "").isalpha() is False:
@@ -53,20 +52,23 @@ while True:
         else:
             break
 
+    # prompt the user for customer address
     while True:
-        c_address = input("Customer Address:").title()
+        c_address = input("Customer Address:                           ").title()
         if len(c_address) == 0:
             print("ERROR: Nothing was entered, please try again.")
         else:
             break
 
+    # prompt the user for customer city
     while True:
-        c_city = input("Customer City:").title()
+        c_city = input("Customer City:                              ").title()
         if len(c_city) == 0:
             print("ERROR: Nothing was entered, please try again.")
         else:
             break
 
+    # prompt the user for customer province
     while True:
         c_province = input("Enter customer province (XX):               ").upper()
         if len(c_province) > 2:
@@ -78,6 +80,7 @@ while True:
         else:
             break
 
+    # prompt the user for customer postal code
     while True:
         postcode = input("Enter customer postal code (X9X9X9):        ").upper().replace("-", "").replace(" ", "")
         if len(postcode) > 6:
@@ -89,6 +92,7 @@ while True:
         else:
             break
 
+    # prompt the user for customer phone number
     while True:
         c_phone_number = input("Enter customer phone number (10 digits):    ").replace("-", "").replace(" ", "").replace(
             "(", "").replace(")", "")
@@ -99,35 +103,41 @@ while True:
         else:
             break
 
+    # prompt the user for the numbers of cars being insured
     while True:
         try:
-            num_car_ins = int(input("Number of cars insured:"))
+            num_car_ins = int(input("Number of cars insured:                     "))
             break
         except ValueError:
             print("ERROR: Invalid input, please try again.")
 
+    # prompt the user for extra liability option
     while True:
-        op_ex_liability = input("Optional Extra liability (Y/N):").upper()
+        op_ex_liability = input("Optional Extra liability (Y/N):             ").upper()
         if not op_ex_liability == "Y" and not op_ex_liability == "N":
             print("ERROR: Invalid input, please use 'Y' or 'N'")
         else:
             break
+
+    # prompt the user for glass coverage option
     while True:
-        op_glass = input("Optional Glass Coverage (Y/N):").upper()
+        op_glass = input("Optional Glass Coverage (Y/N):              ").upper()
         if not op_glass == "Y" and not op_glass == "N":
             print("ERROR: Invalid input, please use 'Y' or 'N'")
         else:
             break
 
+    # prompt the user for loaner car option
     while True:
-        op_loaner = input("Optional Loaner Car (Y/N):").upper()
+        op_loaner = input("Optional Loaner Car (Y/N):                  ").upper()
         if not op_loaner == "Y" and not op_loaner == "N":
             print("ERROR: Invalid input, please use 'Y' or 'N'")
         else:
             break
 
+    # prompt the user for customer payment type preference
     while True:
-        pay_type = input("Full or monthly payment (F/M):").upper()
+        pay_type = input("Full or monthly payment (F/M):              ").upper()
         if not pay_type == "F" and not pay_type == "M":
             print("ERROR: Invalid input, please use 'F' or 'M'")
         else:
@@ -175,6 +185,7 @@ while True:
         print(f" Monthly Payment:              {f'${monthly_payment:>,.2f}':>10s}")
     print()
 
+    # writes the policy information to Policies.dat
     with open('Policies.dat', 'a') as a:
         a.write(f"{str(POLICY_NUM)}, {today}, {c_first_name}, {c_last_name}, {c_address}, {c_city}, {c_province}, {postcode}, {c_phone_number}, {num_car_ins}, {op_ex_liability}, {op_glass}, {op_loaner}, {pay_type}, {total_premium}\n ")
         POLICY_NUM = POLICY_NUM + 1
@@ -183,7 +194,8 @@ while True:
         print("Policy information successfully saved.\n")
         time.sleep(1)
 
-    program_end = input("press any key to enter a new policy or type END to exit... :  ").upper()
+    # program end option, writes all constants back to OSICDef.dat if END is used
+    program_end = input("Press any key to enter a new policy or type END to exit... :  ").upper()
     if program_end == "END":
         f = open('OSICDef.dat', 'w')
         f.write(f'{POLICY_NUM}\n')

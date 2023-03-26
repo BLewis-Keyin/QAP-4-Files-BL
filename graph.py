@@ -23,7 +23,6 @@ while True:
     monthlist = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
     amtlist = [jan_amt, feb_amt, may_amt, apr_amt, may_amt, jun_amt, jul_amt, aug_amt, sep_amt, oct_amt, nov_amt, dec_amt]
 
-
     # Graph processing
     x = monthlist
     y = amtlist
